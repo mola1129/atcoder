@@ -1,23 +1,22 @@
 import math
-
-
-def is_prime(n):
-    if n == 1:
-        return False
-
-    for k in range(2, int(math.sqrt(n)) + 1):
-        if n % k == 0:
-            return False
-
-    return True
-
-
 q = int(input())
 scope = [tuple(map(int, input().split())) for _ in range(q)]
+prime_flag = [True] * (10 ** 5 + 1)
+prime_flag[0] = False
+prime_flag[1] = False
 prime_cnt = [0] * (10 ** 5 + 1)
-for i in range(1, 10 ** 5 + 1):
+
+# エラトステネスの篩
+# 愚直解でも通った
+for i in range(2, math.ceil(math.sqrt(10 ** 5))):
+    for j in range(i + i, 10 ** 5 + 1, i):
+        prime_flag[j] = False
+
+
+for i in range(2, 10 ** 5 + 1):
     prime_cnt[i] = prime_cnt[i - 1]
-    if ((i + 1) / 2) % 1 == 0 and is_prime(i) and is_prime((i + 1) / 2):
+    num = (i + 1) / 2
+    if num % 1 == 0 and prime_flag[i] and prime_flag[int(num)]:
         prime_cnt[i] += 1
 
 for i in range(q):
