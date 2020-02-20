@@ -1,9 +1,3 @@
 n = int(input())
-a = list(map(int, input().split()))
-now = set()
-for i in a:
-    now.add(i)
-if len(now) == n:
-    print('YES')
-else:
-    print('NO')
+a = set(map(int, input().split()))
+print('YES' if len(a) == n else 'NO')
