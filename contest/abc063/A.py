@@ -1,5 +1,2 @@
 a, b = map(int, input().split())
-if (a + b) >= 10:
-    print('error')
-else:
-    print(a + b)
+print('error' if a + b >= 10 else a + b)

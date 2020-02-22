@@ -1,8 +1,4 @@
-import math
 N = int(input())
-A = int(input())
-B = int(input())
-C = int(input())
-D = int(input())
-E = int(input())
-print(math.ceil(N / min(A,B,C,D,E))+4)
+carry = [int(input()) for _ in range(5)]
+min_carry = min(carry)
+print((N + min_carry - 1) // min_carry + 4)
