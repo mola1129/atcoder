@@ -1,7 +1,8 @@
 X = int(input())
 ans = 0
-for i in range(1, 1000):
-    for j in range(2, 11):
-        if i ** j <= X:
-            ans = max(ans, i ** j)
+for b in range(1, 32):
+    for p in range(2, 10):
+        exp = b ** p
+        if exp <= X:
+            ans = max(ans, exp)
 print(ans)

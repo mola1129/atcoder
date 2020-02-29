@@ -1,6 +1,6 @@
 n = int(input())
 t = [int(input()) for _ in range(n)]
-ans = 100000
+ans = float('inf')
 for i in range(2 ** n):
     sum1 = 0
     sum2 = 0
