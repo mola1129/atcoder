@@ -1,26 +1,32 @@
 s = input()
-switch = []
-ans = [0] * (len(s))
-# R→L or L→Rの変化部分を保存
-for i in range(len(s) - 1):
-    if s[i] != s[i + 1]:
-        switch.append(i + 1)
-
-# switch[i]: iが偶数なら　R→L
-#            iが奇数なら　L→Rの境目番号
-start = 0
-for i in range(0, len(switch), 2):
-    # for文終了時のエラー処理
-    if i == len(switch) - 1:
-        end = len(s)
+n = len(s)
+ans = [0] * n
+# 偶奇のカウント
+cnt_even = 0
+cnt_odd = 0
+# 'RL'が見つかったときの'R'の要素番号
+index = 0
+for i in range(n - 1):
+    if s[i] == 'R' and s[i + 1] == 'L':
+        index = i
+    if i % 2:
+        cnt_odd += 1
     else:
-        end = switch[i + 1]
-    #  ...RL...LR部分においてカウントする
-    for num in range(start, end):
-        # 境目部分の偶奇と一致すれば、最終的にその場所に位置する
-        if num % 2 == switch[i] % 2:
-            ans[switch[i]] += 1
+        cnt_even += 1
+    # 'LR'部が境界
+    if s[i] == 'L' and s[i + 1] == 'R' or i == n - 2:
+        # 要素右端のコーナーケース
+        if i == n - 2:
+            if (i + 1) % 2:
+                cnt_odd += 1
+            else:
+                cnt_even += 1
+        if index % 2:
+            ans[index] += cnt_odd
+            ans[index + 1] += cnt_even
         else:
-            ans[switch[i] - 1] += 1
-    start = end
-print(*ans)
+            ans[index] += cnt_even
+            ans[index + 1] += cnt_odd
+        cnt_even = 0
+        cnt_odd = 0
+print(*ans, sep=' ')
